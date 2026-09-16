@@ -81,21 +81,21 @@ public class TestHarness {
         llist.moveToStart();
         for (int i = 0; i < 10; i++) {
             llist.moveToPos(i);
-            assert llist.currPos() == llist.currPosSlow() : "mismatch at index " + i;
+            assert llist.currPos() == i : "mismatch at index " + i;
         }
         llist.moveToPos(5);
         llist.remove();
-        assert llist.currPos() == llist.currPosSlow() : "mismatch after removal";
+        assert llist.currPos() == 4 : "mismatch after removal";
         llist.moveToEnd();
-        assert llist.currPos() == llist.currPosSlow() : "mismatch after moving to end";
+        assert llist.currPos() == 8 : "mismatch after moving to end";
         llist.moveToStart();
-        assert llist.currPos() == llist.currPosSlow() : "mismatch after moving to start";
+        assert llist.currPos() == 0 : "mismatch after moving to start";
         llist.insert(3);
-        assert llist.currPos() == llist.currPosSlow() : "mismatch after insertion";
+        assert llist.currPos() == 0 : "mismatch after insertion";
         llist.next();
-        assert llist.currPos() == llist.currPosSlow() : "mismatch after moving next";
+        assert llist.currPos() == 1 : "mismatch after moving next";
         llist.prev();
-        assert llist.currPos() == llist.currPosSlow() : "mismatch after moving back";
+        assert llist.currPos() == 0 : "mismatch after moving back";
 
     }
 }

@@ -92,19 +92,6 @@ class LList<E> implements List<E> {
     // Return the position of the current element
     public int currPos() {
         return index;
-        // Link<E> temp = head;
-        // int i;
-        // for (i = 0; curr != temp; i++)
-        //     temp = temp.next();
-        // return i;
-    }
-
-    public int currPosSlow() {
-        Link<E> temp = head;
-        int i;
-        for (i = 0; curr != temp; i++)
-             temp = temp.next();
-         return i;
     }
 
     // Move down list to "pos" position
