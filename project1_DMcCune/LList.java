@@ -111,9 +111,10 @@ class LList<E> implements List<E> {
     public void moveToPos(int pos) {
         assert (pos >= 0) && (pos < count) : "Position out of range";
         curr = head;
-        index = pos;
-        for (int i = 0; i < pos; i++)
-            curr = curr.next();
+        index = 0;
+        while (index < pos) {
+            next();
+        }
     }
 
     public E getValue() { // Return current element

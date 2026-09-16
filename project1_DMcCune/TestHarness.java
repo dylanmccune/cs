@@ -3,9 +3,8 @@ package project1_DMcCune;
 public class TestHarness {
     public static void main(String[] args) {
         List<Integer> list = new AList<Integer>(5);
-        List<Integer> emptyList = new AList<Integer>(0);
+        List<Integer> emptyList = new AList<Integer>(1);
         List<Integer> smallList = new AList<Integer>(1);
-
 
         list.append(4);
         list.append(5);
@@ -17,16 +16,37 @@ public class TestHarness {
         System.out.println("Value at end of list: ");
         System.out.println(list.getValue());
 
+        // Test insertion
+        list.moveToStart();
+        list.insert(0);
+        list.moveToEnd();
+        list.insert(0);
+        list.moveToPos(1);
+        list.insert(0);
+        try {
+            list.insert(0);
+        } catch (AssertionError e) {
+            if (e.getMessage().contains("capacity exceeded")) {
+                System.out.println("Catches error when exceeding list capacity");
+            } else {
+                System.out.println("Wrong error when inserting into full list");
+            }
+        } catch (Exception e) {
+            System.out.println("Wrong error when inserting into full list");
+        }
+
         list.remove();
         list.getValue();
 
-        // Removing from an empty list
         emptyList.remove();
+        emptyList.insert(0);
+        emptyList.clear();
 
         smallList.append(0);
-        
+
         smallList.remove();
 
+        smallList.insert(0);
 
         System.out.println("Testing LLists...");
 
@@ -48,7 +68,7 @@ public class TestHarness {
         smallLList.remove();
         System.out.println(smallLList.getValue());
         smallLList.append(0);
-        
+
         List<Integer> emptyLList = new LList<Integer>();
         emptyLList.remove();
 
