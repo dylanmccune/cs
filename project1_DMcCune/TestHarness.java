@@ -30,7 +30,7 @@ public class TestHarness {
 
         System.out.println("Testing LLists...");
 
-        List<Integer> llist = new LList<Integer>();
+        LList<Integer> llist = new LList<Integer>();
 
         llist.append(1);
         llist.append(2);
@@ -51,6 +51,31 @@ public class TestHarness {
         
         List<Integer> emptyLList = new LList<Integer>();
         emptyLList.remove();
+
+        // Test getting the current position
+
+        llist.clear();
+        for (int i = 0; i < 10; i++) {
+            llist.append(i);
+        }
+        llist.moveToStart();
+        for (int i = 0; i < 10; i++) {
+            llist.moveToPos(i);
+            assert llist.currPos() == llist.currPosSlow() : "mismatch at index " + i;
+        }
+        llist.moveToPos(5);
+        llist.remove();
+        assert llist.currPos() == llist.currPosSlow() : "mismatch after removal";
+        llist.moveToEnd();
+        assert llist.currPos() == llist.currPosSlow() : "mismatch after moving to end";
+        llist.moveToStart();
+        assert llist.currPos() == llist.currPosSlow() : "mismatch after moving to start";
+        llist.insert(3);
+        assert llist.currPos() == llist.currPosSlow() : "mismatch after insertion";
+        llist.next();
+        assert llist.currPos() == llist.currPosSlow() : "mismatch after moving next";
+        llist.prev();
+        assert llist.currPos() == llist.currPosSlow() : "mismatch after moving back";
 
     }
 }

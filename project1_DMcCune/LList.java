@@ -6,6 +6,7 @@ class LList<E> implements List<E> {
     private Link<E> tail; // Pointer to last element
     protected Link<E> curr; // Access to current element
     int count; // Size of list
+    int index; // Current list index
     // Constructors
 
     LList(int size) {
@@ -15,12 +16,14 @@ class LList<E> implements List<E> {
     LList() {
         curr = tail = head = new Link<E>(null); // Create header
         count = 0;
+        index = 0;
     }
 
     public void clear() { // Remove all elements
         head.setNext(null); // Drop access to links
         curr = tail = head = new Link<E>(null); // Create header
         count = 0;
+        index = 0;
     }
 
     // Insert "it" at current position
@@ -39,6 +42,7 @@ class LList<E> implements List<E> {
     public void moveToStart() // Set curr at list start
     {
         curr = head;
+        index = 0;
     }
 
     // Remove and return current element
@@ -58,6 +62,7 @@ class LList<E> implements List<E> {
     {
         curr = tail;
         prev();
+        index = count - 1;
     }
 
     // Move curr one step left; no change if already at front
@@ -69,12 +74,14 @@ class LList<E> implements List<E> {
         while (temp.next() != curr)
             temp = temp.next();
         curr = temp;
+        index--;
     }
 
     // Move curr one step right; no change if already at end
     public void next() {
         if (curr != tail) {
             curr = curr.next();
+            index++;
         }
     }
 
@@ -84,17 +91,27 @@ class LList<E> implements List<E> {
 
     // Return the position of the current element
     public int currPos() {
+        return index;
+        // Link<E> temp = head;
+        // int i;
+        // for (i = 0; curr != temp; i++)
+        //     temp = temp.next();
+        // return i;
+    }
+
+    public int currPosSlow() {
         Link<E> temp = head;
         int i;
         for (i = 0; curr != temp; i++)
-            temp = temp.next();
-        return i;
+             temp = temp.next();
+         return i;
     }
 
     // Move down list to "pos" position
     public void moveToPos(int pos) {
         assert (pos >= 0) && (pos < count) : "Position out of range";
         curr = head;
+        index = pos;
         for (int i = 0; i < pos; i++)
             curr = curr.next();
     }
