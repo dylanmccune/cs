@@ -2,13 +2,14 @@ package project1_DMcCune;
 
 public class TestHarness {
     public static void main(String[] args) {
-        List<Integer> list = new AList<Integer>(5);
+        List<Integer> list = new AList<Integer>(10);
         List<Integer> emptyList = new AList<Integer>(1);
         List<Integer> smallList = new AList<Integer>(1);
+        List<Integer> fullList = new AList<Integer>(10);
 
         list.append(4);
         list.append(5);
-        System.out.print("Current list value at index: ");
+        System.out.print("Current list value at index ");
         System.out.println(list.currPos());
         System.out.println(list.getValue());
 
@@ -22,9 +23,14 @@ public class TestHarness {
         list.moveToEnd();
         list.insert(0);
         list.moveToPos(1);
-        list.insert(0);
+
+        // Test exceeding list capacity
+        for (int i = 0; i < 10; i++) {
+            fullList.insert(i);
+        }
+
         try {
-            list.insert(0);
+            fullList.insert(0);
         } catch (AssertionError e) {
             if (e.getMessage().contains("capacity exceeded")) {
                 System.out.println("Catches error when exceeding list capacity");
@@ -47,6 +53,32 @@ public class TestHarness {
         smallList.remove();
 
         smallList.insert(0);
+
+        // Test getting the current position
+
+        list.clear();
+        for (int i = 0; i < 10; i++) {
+            list.append(i);
+        }
+        list.moveToStart();
+        for (int i = 0; i < 10; i++) {
+            list.moveToPos(i);
+            assert list.currPos() == i : "mismatch at index " + i;
+        }
+        
+        list.moveToPos(5);
+        list.remove();
+        assert list.currPos() == 4 : "mismatch after removal";
+        list.moveToEnd();
+        assert list.currPos() == 8 : "mismatch after moving to end";
+        list.moveToStart();
+        assert list.currPos() == 0 : "mismatch after moving to start";
+        list.insert(3);
+        assert list.currPos() == 0 : "mismatch after insertion";
+        list.next();
+        assert list.currPos() == 1 : "mismatch after moving next";
+        list.prev();
+        assert list.currPos() == 0 : "mismatch after moving back";
 
         System.out.println("Testing LLists...");
 
@@ -83,6 +115,7 @@ public class TestHarness {
             llist.moveToPos(i);
             assert llist.currPos() == i : "mismatch at index " + i;
         }
+
         llist.moveToPos(5);
         llist.remove();
         assert llist.currPos() == 4 : "mismatch after removal";
