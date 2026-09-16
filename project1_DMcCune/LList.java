@@ -28,14 +28,14 @@ class LList<E> implements List<E> {
 
     // Insert "it" at current position
     public void insert(E it) {
-        curr.setNext(new Link<E>(it, curr.next()));
+        curr.setNext(Link.get(it, curr.next()));
         if (tail == curr)
             tail = curr.next(); // New tail
         count++;
     }
 
     public void append(E it) { // Append "it" to list
-        tail = tail.setNext(new Link<E>(it, null));
+        tail = tail.setNext(Link.get(it, null));
         count++;
     }
 
@@ -49,13 +49,14 @@ class LList<E> implements List<E> {
     public E remove() {
         if (curr.next() == null)
             return null; // Nothing to remove
-        E it = curr.next().element(); // Remember value
+        Link<E> it = curr.next(); // Remember value
         if (tail == curr.next())
             tail = curr; // Removed last
         curr.setNext(curr.next().next()); // Remove from list
+        it.release(); // Return to freelist
         count--; // Decrement count
         prev();
-        return it; // Return value
+        return it.element(); // Return value
     }
 
     public void moveToEnd() // Set curr at list end
