@@ -3,26 +3,59 @@ package project1_DMcCune;
 public class TestHarness {
     public static void main(String[] args) {
         List<Integer> list = new AList<Integer>(10);
-        List<Integer> emptyList = new AList<Integer>(1);
+        List<Integer> emptyList = new AList<Integer>(0);
         List<Integer> smallList = new AList<Integer>(1);
         List<Integer> fullList = new AList<Integer>(10);
 
-        list.append(4);
-        list.append(5);
-        System.out.print("Current list value at index ");
-        System.out.println(list.currPos());
-        System.out.println(list.getValue());
+        // Test appending and getting from list
+
+        for (int i = 0; i < 10; i++) {
+            list.append(i);
+        }
+        for (int i = 0; i < 10; i++) {
+            list.moveToPos(i);
+            assert list.getValue() == i : "wrong value at" + i;
+        }
+
+        System.out.println("Passed appending and getting");
+
+        list.clear();
+
+        for (int i = 0; i < 10; i++) {
+            list.append(i);
+            list.moveToEnd();
+            assert list.currPos() == i : "couldn't move to end";
+            assert list.currPos() == list.length() - 1 : "couldn't move to end";
+            list.moveToStart();
+            assert list.currPos() == 0 : "couldn't move to start";
+        }
+
+        System.out.println("Passed moving to start and end");
+
+        list.clear();
+
+
+        for (int i = 0; i < 10; i++) {
+            list.insert(i);
+        }
 
         list.moveToEnd();
-        System.out.println("Value at end of list: ");
-        System.out.println(list.getValue());
+        for (int i = 0; i < 10; i++) {
+            assert list.getValue() == i : "wrong value when checking insertions";
+            list.prev();
+        }
 
-        // Test insertion
+        System.out.println("Passed insertions");
+
         list.moveToStart();
-        list.insert(0);
-        list.moveToEnd();
-        list.insert(0);
-        list.moveToPos(1);
+
+        for (int i = 0; i < 10; i++) {
+            assert list.remove() == 9 - i : "wrong return from removal";
+        }
+
+        assert list.length() == 0 : "list not empty after removing all elements";
+
+        System.out.println("Passed removals");
 
         // Test exceeding list capacity
         for (int i = 0; i < 10; i++) {
@@ -36,26 +69,17 @@ public class TestHarness {
                 System.out.println("Catches error when exceeding list capacity");
             } else {
                 System.out.println("Wrong error when inserting into full list");
+                assert false;
             }
         } catch (Exception e) {
             System.out.println("Wrong error when inserting into full list");
+            assert false;
         }
-
-        list.remove();
-        list.getValue();
-
-        emptyList.remove();
-        emptyList.insert(0);
-        emptyList.clear();
-
-        smallList.append(0);
-
-        smallList.remove();
-
-        smallList.insert(0);
+        
+        System.out.println("Passed capacity test");
 
         // Test getting the current position
-
+        System.out.println("Testing ()...");
         list.clear();
         for (int i = 0; i < 10; i++) {
             list.append(i);
@@ -65,20 +89,107 @@ public class TestHarness {
             list.moveToPos(i);
             assert list.currPos() == i : "mismatch at index " + i;
         }
+        System.out.println("Passed currPos() test");
+
+        System.out.println("Testing empty lists...");
+
+        System.out.println("Removal from empty list: " + emptyList.remove());
+        assert emptyList.remove() == null : "Removing from empty list should return null";
+
+        try {
+            emptyList.insert(0);
+        } catch (AssertionError e) {
+            if (e.getMessage().contains("capacity exceeded")) {
+                System.out.println("Catches error when inserting into empty list");
+            } else {
+                System.out.println("Wrong error when inserting into empty list");
+                assert false;
+            }
+        } catch (Exception e) {
+            System.out.println("Wrong error when inserting into empty list");
+            assert false;
+        }
+
+        try {
+            emptyList.next();
+        } catch (AssertionError e) {
+            System.out.println("Errors when getting next() in empty list");
+            assert false;
+        }
+
+        try {
+            emptyList.prev();
+        } catch (AssertionError e) {
+            System.out.println("Errors when getting prev() in empty list");
+            assert false;
+        }
+        try {
+            emptyList.append(0);
+        } catch (AssertionError e) {
+            if (e.getMessage().contains("capacity exceeded")) {
+                System.out.println("Catches error when appending to empty list");
+            } else {
+                System.out.println("Wrong error when appending to empty list");
+                System.out.println("Expected assertionError Capacity exceeded, got " + e.getMessage());
+                assert false;
+            }
+        } catch (Exception e) {
+            System.out.println("Wrong error when appending to empty list");
+            System.out.println("Expected assertionError Capacity exceeded, got " + e.getMessage());
+            assert false;
+        }
+
+        try {
+            emptyList.clear();
+        } catch (AssertionError e) {
+            System.out.println("Errors when clearing empty list");
+            System.out.println("Clearing an empty list should just do nothing");
+            assert false;
+        }
         
-        list.moveToPos(5);
-        list.remove();
-        assert list.currPos() == 4 : "mismatch after removal";
-        list.moveToEnd();
-        assert list.currPos() == 8 : "mismatch after moving to end";
+        smallList.append(53);
+        assert smallList.getValue() == 53 : "Appending to a 1 element list failed";
+
+        assert smallList.remove() == 53 : "Removing from a 1 element list failed";
+
+        smallList.insert(85);
+
+        assert smallList.getValue() == 85 : "Inserting into a 1 element list failed";
+
+        // Test moveToPos();
+
+        list.clear();
+        for (int i = 0; i < 10; i++) {
+            list.append(i);
+        }
+
+        try {
+            list.moveToPos(-1);
+        } catch (AssertionError e) {
+            System.out.println("Catches error when moving to negative position");
+        } catch (Exception e) {
+            System.out.println("Wrong error when moving to negative");
+            assert false;
+        }
+
+        try {
+            list.moveToPos(100000);
+        } catch (AssertionError e) {
+            assert e.getMessage().contains("out of range") : "Expected out of range, got " + e.getMessage();
+        } catch (Exception e) {
+            System.out.println("Expected out of range, got " + e.getMessage());
+            assert false;
+        }
+
+        // Test next() and prev() at list boundaries
+
         list.moveToStart();
-        assert list.currPos() == 0 : "mismatch after moving to start";
-        list.insert(3);
-        assert list.currPos() == 0 : "mismatch after insertion";
-        list.next();
-        assert list.currPos() == 1 : "mismatch after moving next";
         list.prev();
-        assert list.currPos() == 0 : "mismatch after moving back";
+        assert list.currPos() == 0 : "calling prev at start should do nothing";
+        list.moveToEnd();
+        list.next();
+        assert list.currPos() == list.length() - 1 : "calling next at end should do nothing";
+
 
         System.out.println("Testing LLists...");
 

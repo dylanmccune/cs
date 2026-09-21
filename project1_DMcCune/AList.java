@@ -63,7 +63,11 @@ class AList<E> implements List<E> {
     }
 
     public void moveToEnd() {
-        curr = listSize - 1;
+        if (listSize == 0) {
+            curr = 0;
+        } else {
+            curr = listSize - 1;
+        }
     } // Reset
 
     public void prev() {
@@ -72,7 +76,7 @@ class AList<E> implements List<E> {
     } // Back up
 
     public void next() {
-        if (curr < listSize)
+        if (curr < listSize - 1)
             curr++;
     } // Next
     // Return list size

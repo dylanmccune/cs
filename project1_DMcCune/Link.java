@@ -36,8 +36,9 @@ class Link<E> {
     // Get new link
 
     static <E> Link<E> get(E it, Link<E> nextval) {
-        if (freelist == null)
+        if (freelist == null) {
             return new Link<E>(it, nextval); // Get a new link because none exist in freelist
+        }
         Link<E> temp = freelist; // Get from freelist
         freelist = freelist.next();
         temp.setElement(it);
