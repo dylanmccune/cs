@@ -34,7 +34,6 @@ public class TestHarness {
 
         list.clear();
 
-
         for (int i = 0; i < 10; i++) {
             list.insert(i);
         }
@@ -75,7 +74,7 @@ public class TestHarness {
             System.out.println("Wrong error when inserting into full list");
             assert false;
         }
-        
+
         System.out.println("Passed capacity test");
 
         // Test getting the current position
@@ -146,7 +145,7 @@ public class TestHarness {
             System.out.println("Clearing an empty list should just do nothing");
             assert false;
         }
-        
+
         smallList.append(53);
         assert smallList.getValue() == 53 : "Appending to a 1 element list failed";
 
@@ -222,7 +221,6 @@ public class TestHarness {
 
         llist.clear();
 
-
         for (int i = 0; i < 10; i++) {
             llist.insert(i);
         }
@@ -289,7 +287,7 @@ public class TestHarness {
         }
         try {
             emptyLList.append(0);
-        
+
         } catch (Exception e) {
             System.out.println("Errors when appending to empty list");
             System.out.println("Got " + e.getMessage());
@@ -303,7 +301,7 @@ public class TestHarness {
             System.out.println("Clearing an empty list should just do nothing");
             assert false;
         }
-        
+
         smallLList.append(53);
         assert smallLList.getValue() == 53 : "Appending to a 1 element list failed";
 

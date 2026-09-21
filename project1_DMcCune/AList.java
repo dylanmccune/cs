@@ -49,7 +49,7 @@ class AList<E> implements List<E> {
     public void moveToStart() {
         curr = 0;
     } // Reset position
-    // Remove and return the current element.
+      // Remove and return the current element.
 
     public E remove() {
         if ((curr < 0) || (curr >= listSize)) // No current element
@@ -79,7 +79,7 @@ class AList<E> implements List<E> {
         if (curr < listSize - 1)
             curr++;
     } // Next
-    // Return list size
+      // Return list size
 
     public int length() {
         return listSize;
