@@ -53,10 +53,10 @@ class LList<E> implements List<E> {
         if (tail == curr.next())
             tail = curr; // Removed last
         curr.setNext(curr.next().next()); // Remove from list
+        E value = it.element(); // Remember value before releasing so it can be returned
         it.release(); // Return to freelist
         count--; // Decrement count
-        prev();
-        return it.element(); // Return value
+        return value; // Return value
     }
 
     public void moveToEnd() // Set curr at list end
