@@ -253,7 +253,7 @@ public class TestHarness {
         for (int i = 0; i < 100000; i++) {
             fullLList.remove();
         }
-        
+
         System.out.println("Passed capacity test");
 
         // Test getting the current position
@@ -315,11 +315,11 @@ public class TestHarness {
 
         smallLList.clear();
         smallLList.append(0);
-        smallLList.prev();
         smallLList.moveToEnd();
         assert smallLList.currPos() == 0 : "Mismatch after moving around 1 element list";
         smallLList.next();
         smallLList.append(1);
+        smallLList.next();
         assert smallLList.getValue() == 1 : "Mismatch after appending at tail";
 
         smallLList.insert(2);
@@ -356,9 +356,9 @@ public class TestHarness {
         llist.prev();
         assert llist.currPos() == 0 : "calling prev at start should do nothing";
         llist.moveToEnd();
+        assert llist.currPos() == llist.length() - 1 : "calling moveToEnd should set position to last";
         llist.next();
-        assert llist.currPos() == llist.length() : "calling next at end should do nothing";
-
+        assert llist.currPos() == llist.length() - 1 : "calling next at end should do nothing";
 
         // Just some more random tests to make sure
 

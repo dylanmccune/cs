@@ -80,7 +80,7 @@ class LList<E> implements List<E> {
 
     // Move curr one step right; no change if already at end
     public void next() {
-        if (curr != tail) {
+        if (index != length() - 1) {
             curr = curr.next();
             index++;
         }
