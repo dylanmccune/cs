@@ -32,6 +32,15 @@ public class TestHarness {
         System.out.println("Length of freelist: " + lQueue.freeListCount());
         assert lQueue.freeListCount() == 9 : "Freelist should be 9, got " + lQueue.freeListCount();
 
+        LList<Integer> lList = new LList<>();
+        for (int i = 0; i < 10; i++) {
+            lList.append(i);
+        }
+        lList.reverse();
+        lList.moveToStart();
+        for (int i = 0; i < 10; i++) {
+            assert lList.remove() == 9 - i : "Removed value should be " + (9 - i) + ", got " + lList.getValue();
+        }
         System.out.println(
                 "Tests passed");
 
