@@ -17,7 +17,7 @@ public class TestHarness {
             }
         }
         System.out.println("Testing LQueue");
-        Queue<Integer> lQueue = new AQueue<>(10);
+        LQueue<Integer> lQueue = new LQueue<>(10);
         for (int j = 0; j < 10; j++) {
 
             for (int i = 0; i < 9; i++) { // Use 9 elements to test circular increment
@@ -29,9 +29,19 @@ public class TestHarness {
                 assert lQueue.dequeue() == i : "Dequeued value should be " + i;
             }
         }
+        System.out.println("Length of freelist: " + lQueue.freeListCount());
+        assert lQueue.freeListCount() == 9 : "Freelist should be 9, got " + lQueue.freeListCount();
 
         System.out.println(
                 "Tests passed");
-        assert false : "assertions work";
+
+        try {
+            assert false : "assertions work";
+            System.out.println("\u001B[31mASSERTIONS NO WORKY");
+            System.out.println("I ANGY");
+            System.out.println("TURN ON ASSERTINS\u001B[33m");
+        } catch (AssertionError e) {
+            System.out.println("Assertions are enabled");
+        }
     }
 }
