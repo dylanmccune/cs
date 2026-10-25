@@ -41,6 +41,23 @@ public class TestHarness {
         for (int i = 0; i < 10; i++) {
             assert lList.remove() == 9 - i : "Removed value should be " + (9 - i) + ", got " + lList.getValue();
         }
+
+        for (int i = 0; i < 10; i++) {
+            lList.append(2*i);
+        }
+
+        LList<Integer> lListB = new LList<>();
+        for (int i = 0; i < 10; i++) {
+            lListB.append(2*i + 1);
+        }
+        lListB.moveToStart();
+
+        LList<Integer> mergedList = lList.mergeList(lListB);
+        mergedList.moveToStart();
+        for (int i = 0; i < 20; i++) {
+            assert mergedList.getValue() == i : "Merged list value should be " + i + ", got " + mergedList.getValue();
+            mergedList.next();
+        }
         System.out.println(
                 "Tests passed");
 

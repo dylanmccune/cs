@@ -1,7 +1,7 @@
 package project2;
 
 // Linked list implementation
-class LList<E> implements List<E> {
+class LList<E extends Comparable<E>> implements List<E> {
 
     private Link<E> head; // Pointer to list header
     private Link<E> tail; // Pointer to last element
@@ -137,6 +137,34 @@ class LList<E> implements List<E> {
         }
 
         head.setNext(prev);
+    }
+
+    public LList<E> mergeList(LList<E> b) {
+        LList<E> mergedList = new LList<>();
+        b.moveToStart();
+        this.moveToStart();
+        System.out.println(b.curr.next());
+        System.out.println(this.curr.next());
+
+        while (this.curr.next() != null && b.curr.next() != null) {
+            if (this.getValue().compareTo(b.getValue()) <= 0) {
+                mergedList.append(this.getValue());
+                this.curr = this.curr.next();
+            } else {
+                mergedList.append(b.getValue());
+                b.curr = b.curr.next();
+            }
+        }
+
+        while (this.curr.next() != null) {
+            mergedList.append(this.getValue());
+            this.curr = this.curr.next();
+        }
+        while (b.curr.next() != null) {
+            mergedList.append(b.getValue());
+            b.curr = b.curr.next();
+        }
+        return mergedList;
     }
 
 }
