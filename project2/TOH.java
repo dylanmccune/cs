@@ -20,7 +20,8 @@ public class TOH {
 
     void solveFast() {
         // The towers of hanoi problem is fun to think about, but it's also kinda stupid because it mandates the method of solving it.
-        // That would be like saying "implement lists, but you must use recursion to do it".
+        // That would be like saying "implement AQueues, but you can't use circular increment".
+        // Like there's a faster way, why not use it?
         // So, this is the fast way.
         goal = start;
         start = new Pole();
