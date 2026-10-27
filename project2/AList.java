@@ -51,13 +51,15 @@ class AList<E> implements List<E> {
       // Remove and return the current element.
 
     public E remove() {
+        System.out.println(currPos());
         if ((curr < 0) || (curr >= listSize)) // No current element
             return null;
         E it = listArray[curr]; // Copy the element
         for (int i = curr; i < listSize - 1; i++) // Shift them down
             listArray[i] = listArray[i + 1];
         listSize--; // Decrement size
-        prev();
+                System.out.println(currPos());
+
         return it;
     }
 

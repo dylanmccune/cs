@@ -230,7 +230,7 @@ public class TestHarness {
 
         assert dict.find(248195757) == null : "Trying to find something not in the dict should return null";
 
-        TOH toh = new TOH(10);
+        TOH toh = new TOH(5);
         toh.solve();
         assert toh.end().toString().equals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]") : "Error during solving TOH";
 

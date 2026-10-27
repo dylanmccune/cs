@@ -21,7 +21,7 @@ public class TOH {
     }
 
     /**
-     * Satrical fast solution
+     * Satirical fast solution
      */
     void solveFast() {
         // The towers of hanoi problem is fun to think about, but it's also kinda stupid
@@ -37,10 +37,11 @@ public class TOH {
     static void solveHelp(int n, Pole start, Pole goal, Pole temp) {
         if (n == 0)
             return; // Base case
-        // System.out.println("Solving Tower of Hanoi with " + n + " rings");
-        solveHelp(n - 1, start, temp, goal); // Recursive call: n-1 rings
+        solveHelp(n - 1, start, temp, goal);
         move(start, goal); // Move bottom disk to goal
-        solveHelp(n - 1, temp, goal, start); // Recursive call: n-1 rings
+        System.out.println("Start pole: " + start.toString() + "\nEnd pole: " + goal.toString() + "\nMiddle pole: "
+                + temp.toString());
+        solveHelp(n - 1, temp, goal, start);
     }
 
     /**
