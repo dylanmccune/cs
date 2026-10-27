@@ -221,6 +221,10 @@ public class TestHarness {
 
         assert dict.find(248195757) == null : "Trying to find something not in the dict should return null";
 
+        TOH toh = new TOH(20);
+        toh.solve();
+        System.out.println(toh.toString());
+
 
         System.out.println(
                 "Tests passed");
