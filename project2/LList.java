@@ -143,8 +143,6 @@ class LList<E extends Comparable<E>> implements List<E> {
         LList<E> mergedList = new LList<>();
         b.moveToStart();
         this.moveToStart();
-        System.out.println(b.curr.next());
-        System.out.println(this.curr.next());
 
         while (this.curr.next() != null && b.curr.next() != null) {
             if (this.getValue().compareTo(b.getValue()) <= 0) {

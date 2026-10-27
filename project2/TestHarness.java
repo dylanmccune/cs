@@ -58,6 +58,20 @@ public class TestHarness {
             assert mergedList.getValue() == i : "Merged list value should be " + i + ", got " + mergedList.getValue();
             mergedList.next();
         }
+
+        SALdictionary<Integer, Integer> dict = new SALdictionary<>();
+        for (int i = 9; i >= 0; i--) {
+            dict.insert(i, i * 42);
+        }
+
+        System.out.println(dict.toString());
+
+        AList<Integer> aList = new AList<>(10);
+        for (int i = 0; i < 10; i++) {
+            aList.append(i);
+        }
+        System.out.println(aList.toString());
+
         System.out.println(
                 "Tests passed");
 
