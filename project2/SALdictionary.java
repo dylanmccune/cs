@@ -68,10 +68,18 @@ class SALdictionary<K extends Comparable<? super K>, E>
 
     // Find "k" using sequential search
     public E find(K k) {
-        for (list.moveToStart(); list.currPos() < list.length(); list.next()) {
-            KVpair<K, E> temp = list.getValue();
-            if (k == temp.key())
-                return temp.value();
+        int low = 0;
+        int high = list.length() - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            list.moveToPos(mid);
+            if (list.getValue().key().compareTo(k) == 0) {
+                return list.getValue().value();
+            } else if (list.getValue().key().compareTo(k) == -1) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
         return null; // "k" does not appear in dictionary
     }

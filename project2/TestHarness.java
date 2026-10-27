@@ -65,7 +65,9 @@ public class TestHarness {
         }
 
         System.out.println(dict.toString());
-
+        for (int i = 0; i < 10; i++) {
+            assert dict.find(i) == i * 42 : "Error during find(). Expected " + (i * 42) + ", got " + dict.find(i);
+        }
         AList<Integer> aList = new AList<>(10);
         for (int i = 0; i < 10; i++) {
             aList.append(i);
