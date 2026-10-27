@@ -122,7 +122,13 @@ class LList<E extends Comparable<E>> implements List<E> {
         return curr.next().element();
     }
 
+    /**
+     * Reverse the elements in the list
+     */
     public void reverse() {
+        if (length() < 2) {
+            return; // Empty or one element lists don't need to be reversed
+        }
         Link<E> prev = null;
         Link<E> current = head.next();
         Link<E> next;
@@ -139,7 +145,22 @@ class LList<E extends Comparable<E>> implements List<E> {
         head.setNext(prev);
     }
 
+    /**
+     * Reverse the elements in the list
+     */
+    public void reverseOrder() {
+        reverse();
+    }
+
+    /**
+     * Merge two lists. They must be sorted.
+     * 
+     * @param b The second list to merge with the current one
+     * @return The merged list (sorted)
+     */
     public LList<E> mergeList(LList<E> b) {
+        int tempPos = this.currPos();
+        int tempBPos = b.currPos();
         LList<E> mergedList = new LList<>();
         b.moveToStart();
         this.moveToStart();
@@ -162,10 +183,25 @@ class LList<E extends Comparable<E>> implements List<E> {
             mergedList.append(b.getValue());
             b.curr = b.curr.next();
         }
+        moveToPos(tempPos);
+        b.moveToPos(tempBPos);
         return mergedList;
     }
 
+    /**
+     * Merge two lists. They must be sorted.
+     * 
+     * @param b The second list to merge with the current one
+     * @return The merged list (sorted)
+     */
+    public LList<E> mergeLists(LList<E> b) {
+        return mergeList(b);
+    }
+
     public String toString() {
+        if (length() == 0) {
+            return "";
+        }
         moveToStart();
         String string = "" + getValue(); // I bet there's a better way to convert this to a string but hey it work
         next();
@@ -173,6 +209,7 @@ class LList<E extends Comparable<E>> implements List<E> {
             string += ", " + getValue();
             next();
         }
+        string += ", " + getValue();
         return string;
     }
 

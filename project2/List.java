@@ -54,7 +54,11 @@ public interface List<E> {
      */
     public void next();
 
-    /** @return The number of elements in the list. */
+    /**
+     * The length of the list.
+     * 
+     * @return The number of elements in the list.
+     */
     public int length();
 
     /** @return The position of the current element. */
@@ -66,6 +70,14 @@ public interface List<E> {
      * @param pos The position to make current.
      */
     public void moveToPos(int pos);
+
+    /**
+     * Get a string representation of the list.
+     * 
+     * @return A string representation of the list.
+     */
+
+    public String toString();
 
     /** @return The current element. */
     public E getValue();

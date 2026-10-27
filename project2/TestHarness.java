@@ -40,7 +40,7 @@ public class TestHarness {
         for (int i = 3; i < 13; i++) {
             int temp = queue.dequeue();
             assert temp == i : "Dequeued value should be " + i + " got " + temp;
-        } 
+        }
 
         System.out.println("Testing LQueue");
         LQueue<Integer> lQueue = new LQueue<>();
@@ -74,8 +74,8 @@ public class TestHarness {
         }
 
         lList.reverse();
-
-        assert lList.toString().contains("18, 16, 14, 12, 10, 8, 6, 4, 2") : "Error during reversal";
+        assert lList.toString().contains("18, 16, 14, 12, 10, 8, 6, 4, 2, 0") : "Error during reversal";
+        
 
         lList.reverse();
 
@@ -115,6 +115,10 @@ public class TestHarness {
         dict.clear();
 
         assert dict.toString() == "" : "toString breaks on empty dictionary";
+        assert aList.toString() == "" : "toString breaks on empty AList";
+        assert lList.toString() == "" : "toString breaks on empty LList";
+        assert lQueue.toString() == "" : "toString breaks on empty LQueue";
+        assert queue.toString() == "" : "toString breaks on empty AQueue";
 
         try {
             aList.clear();
@@ -171,8 +175,8 @@ public class TestHarness {
             assert false : "Error during appending after clearing: " + e;
         }
 
-        dict.insert(-1,2);
-        dict.insert(1,2);
+        dict.insert(-1, 2);
+        dict.insert(1, 2);
 
         System.out.println("Array overflow tests");
         for (int i = 1; i < 10; i++) {
@@ -230,7 +234,27 @@ public class TestHarness {
         toh.solve();
         assert toh.end().toString().equals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]") : "Error during solving TOH";
 
+        AQueue<Integer> test = new AQueue<>(1);
 
+        test.enqueue(1);
+
+        dict.clear();
+        for (int i = 0; i < 10; i++) {
+            dict.insert(i, i * 10);
+        }
+
+        int i = 9;
+        while (dict.length() > 0) {
+            assert dict.removeAny() == i * 10;
+            i--;
+        }
+
+        lList.clear();
+        lList.moveToEnd();
+        lList.reverse();
+        lList.append(0);
+        
+        assert test.dequeue() == 1 : "Error during dequeueing from small aqueue";
         System.out.println(
                 "Tests passed");
 

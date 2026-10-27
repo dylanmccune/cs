@@ -57,6 +57,23 @@ class LQueue<E> implements Queue<E> {
         return size;
     } // Return length
 
+    public String toString() {
+        if (length() == 0) {
+            return "";
+        }
+        Link<E> temp = front;
+        String string = "" + temp.element();
+        while (temp.next() != null) {
+            temp = temp.next();
+            string += " " + temp.element();
+        }
+        return string;
+    }
+
+    /**
+     * Get the number of items in the freelist
+     * @return The number of links
+     */
     public int freeListCount() {
         int freeListCount = 0;
         Link<E> temp = Link.freelist;

@@ -32,7 +32,6 @@ class AList<E> implements List<E> {
         listSize = curr = 0;
     } // Simply reinitialize values
 
-    /** Insert "it" at current position */
     public void insert(E it) {
         assert listSize < maxSize : "List capacity exceeded";
         for (int i = listSize; i > curr; i--) // Shift elements up
@@ -102,6 +101,9 @@ class AList<E> implements List<E> {
 
     public String toString() {
         String string = "";
+        if (listSize == 0) {
+            return "";
+        }
         for (int i = 0; i < listSize - 1; i++) {
             string += listArray[i] + ", ";
         }

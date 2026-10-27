@@ -51,7 +51,7 @@ class SALdictionary<K extends Comparable<? super K>, E>
         }
     }
 
-    /** Use sequential search to find the element to remove */
+    /** Use binary search to find the element to remove */
     public E remove(K k) {
         E temp = find(k);
         if (temp != null)
@@ -63,7 +63,6 @@ class SALdictionary<K extends Comparable<? super K>, E>
     public E removeAny() {
         if (size() != 0) {
             list.moveToEnd();
-            list.prev();
             KVpair<K, E> e = list.remove();
             return e.value();
         } else

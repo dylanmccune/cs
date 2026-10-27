@@ -29,6 +29,11 @@ public interface Queue<E> {
     public E frontValue();
 
     /**
+     * @return A string representation of the queue.
+     */
+    public String toString();
+
+    /**
      * @return The number of elements in the queue.
      */
     public int length();

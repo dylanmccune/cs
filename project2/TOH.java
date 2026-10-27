@@ -13,10 +13,16 @@ public class TOH {
         }
     }
 
+    /**
+     * Solve the towers of hanoi
+     */
     void solve() {
         solveHelp(count, start, goal, temp);
     }
 
+    /**
+     * Satrical fast solution
+     */
     void solveFast() {
         // The towers of hanoi problem is fun to think about, but it's also kinda stupid
         // because it mandates the method of solving it.
@@ -31,21 +37,34 @@ public class TOH {
     static void solveHelp(int n, Pole start, Pole goal, Pole temp) {
         if (n == 0)
             return; // Base case
-        System.out.println("Solving Tower of Hanoi with " + n + " rings");
+        // System.out.println("Solving Tower of Hanoi with " + n + " rings");
         solveHelp(n - 1, start, temp, goal); // Recursive call: n-1 rings
         move(start, goal); // Move bottom disk to goal
         solveHelp(n - 1, temp, goal, start); // Recursive call: n-1 rings
     }
 
+    /**
+     * Move the top ring from one pole to another
+     * @param start
+     * @param end
+     */
     static void move(Pole start, Pole end) {
         int ring = start.remove();
         end.add(ring);
-        System.out.println("Moving " + ring + " from " + start + " to " + end);
     }
 
+    /**
+     * The first pole
+     * @return
+     */
     Pole start() {
         return start;
     }
+
+    /**
+     * The last pole
+     * @return
+     */
     Pole end() {
         return goal;
     }

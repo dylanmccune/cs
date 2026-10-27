@@ -17,14 +17,14 @@ class AQueue<E> implements Queue<E> {
     @SuppressWarnings("unchecked") // For generic array
     AQueue(int size) {
         maxSize = size;
-        front = 1;
+        front = 0;
         length = 0;
         listArray = (E[]) new Object[maxSize]; // Create listArray
     }
 
     public void clear() // Reinitialize
     {
-        front = 1;
+        front = 0;
         length = 0;
     }
 
@@ -45,6 +45,14 @@ class AQueue<E> implements Queue<E> {
     public E frontValue() { // Get front value
         assert length() != 0 : "Queue is empty";        
         return listArray[front];
+    }
+
+    public String toString() {
+        String string = "";
+        for (int i = 0; i < length; i++) {
+            string += listArray[(front + i) % maxSize] + ", ";
+        }
+        return string;
     }
 
     public int length() // Return length
