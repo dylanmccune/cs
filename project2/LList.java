@@ -50,7 +50,7 @@ class LList<E extends Comparable<E>> implements List<E> {
 
     // Remove and return current element
     public E remove() {
-        if (curr.next() == null) {
+        if (curr.next() == null || length() == 0) {
             return null; // Nothing to remove
 
         }
@@ -68,6 +68,9 @@ class LList<E extends Comparable<E>> implements List<E> {
 
     public void moveToEnd() // Set curr at list end
     {
+        if (length() == 0) {
+            return;
+        }
         curr = tail;
         prev();
         index = count - 1;
