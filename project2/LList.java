@@ -165,4 +165,15 @@ class LList<E extends Comparable<E>> implements List<E> {
         return mergedList;
     }
 
+    public String toString() {
+        moveToStart();
+        String string = "" + getValue(); // I bet there's a better way to convert this to a string but hey it work
+        next();
+        while (currPos() < length() - 1) {
+            string += ", " + getValue();
+            next();
+        }
+        return string;
+    }
+
 }

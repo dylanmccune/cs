@@ -66,7 +66,7 @@ class SALdictionary<K extends Comparable<? super K>, E>
             return null;
     }
 
-    // Find "k" using sequential search
+    // Find "k" using binary search
     public E find(K k) {
         int low = 0;
         int high = list.length() - 1;
@@ -84,11 +84,24 @@ class SALdictionary<K extends Comparable<? super K>, E>
         return null; // "k" does not appear in dictionary
     }
 
+    /** Move to a position in the queue
+     * @param pos The position to be moved to
+     */
+    public void moveToPos(int pos) {
+        list.moveToPos(pos);
+    }
+
     public int size() // Return list size
     {
         return list.length();
     }
 
+    public int length() {
+        return size(); // Make the method name consistent with lists
+    }
+    /**
+     * @return A string representation of the items in the dictionary
+     */
     public String toString() {
         String string = "";
         for (list.moveToStart(); list.currPos() + 1 < list.length(); list.next()) {
