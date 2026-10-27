@@ -27,10 +27,23 @@ class SALdictionary<K extends Comparable<? super K>, E>
             list.append(temp);
             return;
         }
-        while (list.getValue().key().compareTo(temp.key()) < 0 && list.currPos() <
-        list.length() - 1) {
-        list.next();
+        int high = list.length() - 1;
+        int low = 0;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            list.moveToPos(mid);
+            KVpair<K, E> midPair = list.getValue();
+            if (midPair.key().compareTo(temp.key()) == -1) {
+                low = mid + 1;
+            } else if (midPair.key().compareTo(temp.key()) == 1) {
+                high = mid - 1;
+            } else {
+                list.remove();
+                list.insert(temp);
+                return;
+            }
         }
+        list.moveToPos(low);
         list.insert(temp);
     }
 
