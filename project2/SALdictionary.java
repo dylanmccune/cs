@@ -108,6 +108,9 @@ class SALdictionary<K extends Comparable<? super K>, E>
      */
     public String toString() {
         String string = "";
+        if (list.length() == 0) {
+            return "";
+        }
         for (list.moveToStart(); list.currPos() + 1 < list.length(); list.next()) {
             KVpair<K, E> temp = list.getValue();
             string += temp.toString() + "\n";

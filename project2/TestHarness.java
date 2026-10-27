@@ -114,6 +114,8 @@ public class TestHarness {
         queue.clear();
         dict.clear();
 
+        assert dict.toString() == "" : "toString breaks on empty dictionary";
+
         try {
             aList.clear();
             assert aList.length() == 0;
