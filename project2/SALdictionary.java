@@ -33,18 +33,22 @@ class SALdictionary<K extends Comparable<? super K>, E>
             int mid = low + (high - low) / 2;
             list.moveToPos(mid);
             KVpair<K, E> midPair = list.getValue();
-            if (midPair.key().compareTo(temp.key()) == -1) {
+            if (midPair.key().compareTo(temp.key()) < 0) {
                 low = mid + 1;
-            } else if (midPair.key().compareTo(temp.key()) == 1) {
+            } else if (midPair.key().compareTo(temp.key()) > 0) {
                 high = mid - 1;
             } else {
                 list.remove();
-                list.insert(temp);
+                insert(temp.key(), temp.value());
                 return;
             }
         }
+        if (low > list.length() - 1) {
+            list.append(temp);
+        } else {
         list.moveToPos(low);
         list.insert(temp);
+        }
     }
 
     /** Use sequential search to find the element to remove */
@@ -75,7 +79,7 @@ class SALdictionary<K extends Comparable<? super K>, E>
             list.moveToPos(mid);
             if (list.getValue().key().compareTo(k) == 0) {
                 return list.getValue().value();
-            } else if (list.getValue().key().compareTo(k) == -1) {
+            } else if (list.getValue().key().compareTo(k) < 0) {
                 low = mid + 1;
             } else {
                 high = mid - 1;

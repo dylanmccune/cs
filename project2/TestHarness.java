@@ -92,7 +92,7 @@ public class TestHarness {
             mergedList.next();
         }
 
-        SALdictionary<Integer, Integer> dict = new SALdictionary<>();
+        SALdictionary<Integer, Integer> dict = new SALdictionary<>(10);
         for (int i = 9; i >= 0; i--) {
             dict.insert(i, i * 42);
         }
@@ -169,6 +169,9 @@ public class TestHarness {
             assert false : "Error during appending after clearing: " + e;
         }
 
+        dict.insert(-1,2);
+        dict.insert(1,2);
+
         System.out.println("Array overflow tests");
         for (int i = 1; i < 10; i++) {
             aList.append(i);
@@ -221,9 +224,9 @@ public class TestHarness {
 
         assert dict.find(248195757) == null : "Trying to find something not in the dict should return null";
 
-        TOH toh = new TOH(20);
+        TOH toh = new TOH(10);
         toh.solve();
-        System.out.println(toh.toString());
+        assert toh.end().toString().equals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]") : "Error during solving TOH";
 
 
         System.out.println(
