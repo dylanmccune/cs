@@ -37,11 +37,12 @@ public class TOH {
     static void solveHelp(int n, Pole start, Pole goal, Pole temp) {
         if (n == 0)
             return; // Base case
-        solveHelp(n - 1, start, temp, goal);
+        // System.out.println("Solving Tower of Hanoi with " + n + " rings");
+        solveHelp(n - 1, start, temp, goal); // Recursive call: n-1 rings
         move(start, goal); // Move bottom disk to goal
         System.out.println("Start pole: " + start.toString() + "\nEnd pole: " + goal.toString() + "\nMiddle pole: "
                 + temp.toString());
-        solveHelp(n - 1, temp, goal, start);
+        solveHelp(n - 1, temp, goal, start); // Recursive call: n-1 rings
     }
 
     /**

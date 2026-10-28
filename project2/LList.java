@@ -162,6 +162,11 @@ class LList<E extends Comparable<E>> implements List<E> {
      * @return The merged list (sorted)
      */
     public LList<E> mergeList(LList<E> b) {
+        if (length() == 0) {
+            return b;
+        } else if (b.length() == 0) {
+            return this;
+        }
         int tempPos = this.currPos();
         int tempBPos = b.currPos();
         LList<E> mergedList = new LList<>();
@@ -202,6 +207,7 @@ class LList<E extends Comparable<E>> implements List<E> {
     }
 
     public String toString() {
+        int temp = currPos();
         if (length() == 0) {
             return "";
         }
@@ -212,7 +218,10 @@ class LList<E extends Comparable<E>> implements List<E> {
             string += ", " + getValue();
             next();
         }
-        string += ", " + getValue();
+        if (length() > 1) {
+            string += ", " + getValue();
+        }
+        moveToPos(temp);
         return string;
     }
 

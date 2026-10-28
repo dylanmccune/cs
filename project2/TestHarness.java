@@ -232,7 +232,7 @@ public class TestHarness {
 
         TOH toh = new TOH(5);
         toh.solve();
-        assert toh.end().toString().equals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]") : "Error during solving TOH";
+        assert toh.end().toString().equals("[1, 2, 3, 4, 5]") : "Error during solving TOH";
 
         AQueue<Integer> test = new AQueue<>(1);
 
@@ -253,6 +253,10 @@ public class TestHarness {
         lList.moveToEnd();
         lList.reverse();
         lList.append(0);
+
+        assert lList.mergeList(new LList<>()).length() == 1 : "Error after merging LList with empty";
+
+        assert lList.toString().equals("0") : "toString breaks on small LList";
         
         assert test.dequeue() == 1 : "Error during dequeueing from small aqueue";
         System.out.println(
