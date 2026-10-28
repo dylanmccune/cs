@@ -163,9 +163,9 @@ class LList<E extends Comparable<E>> implements List<E> {
      */
     public LList<E> mergeList(LList<E> b) {
         if (length() == 0) {
-            return b;
+            return b.copy();
         } else if (b.length() == 0) {
-            return this;
+            return this.copy();
         }
         int tempPos = this.currPos();
         int tempBPos = b.currPos();
@@ -204,6 +204,22 @@ class LList<E extends Comparable<E>> implements List<E> {
      */
     public LList<E> mergeLists(LList<E> b) {
         return mergeList(b);
+    }
+
+    public LList<E> copy() {
+        if (length() == 0) {
+            return new LList<>();
+        }
+        LList<E> copy = new LList<>();
+        int temp = currPos();
+        moveToStart();
+        while (currPos() < length() - 1) {
+            copy.append(getValue());
+            next();
+        }
+        copy.append(getValue());
+        moveToPos(temp);
+        return copy;
     }
 
     public String toString() {
