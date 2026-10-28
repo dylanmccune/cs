@@ -99,6 +99,11 @@ class LList<E extends Comparable<E>> implements List<E> {
         }
     }
 
+    private void nextUnsafe() {
+        curr = curr.next();
+        index++;
+    }
+
     public int length() {
         return count;
     }
@@ -115,6 +120,14 @@ class LList<E extends Comparable<E>> implements List<E> {
         index = 0;
         while (index < pos) {
             next();
+        }
+    }
+
+    private void moveToPosUnsafe(int pos) {
+        curr = head;
+        index = 0;
+        while (index < pos) {
+            nextUnsafe();
         }
     }
 
@@ -146,6 +159,7 @@ class LList<E extends Comparable<E>> implements List<E> {
         }
 
         head.setNext(prev);
+        moveToPosUnsafe(currPos());
     }
 
     /**
@@ -191,8 +205,8 @@ class LList<E extends Comparable<E>> implements List<E> {
             mergedList.append(b.getValue());
             b.curr = b.curr.next();
         }
-        moveToPos(tempPos);
-        b.moveToPos(tempBPos);
+        moveToPosUnsafe(tempPos);
+        b.moveToPosUnsafe(tempBPos);
         return mergedList;
     }
 
@@ -218,7 +232,7 @@ class LList<E extends Comparable<E>> implements List<E> {
             next();
         }
         copy.append(getValue());
-        moveToPos(temp);
+        moveToPosUnsafe(temp);
         return copy;
     }
 
@@ -237,7 +251,7 @@ class LList<E extends Comparable<E>> implements List<E> {
         if (length() > 1) {
             string += ", " + getValue();
         }
-        moveToPos(temp);
+        moveToPosUnsafe(temp);
         return string;
     }
 
