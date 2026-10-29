@@ -185,8 +185,19 @@ class BST<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> 
         out.append(it + " ");
     }
     
+    public void printHighToLowHelp(BSTNode<Key, E> rt) {
+        if (rt == null) {
+            return;
+        }
+        printHighToLowHelp(rt.right());
+        printVisit(rt.element());
+        printHighToLowHelp(rt.left());
+    }
+
     public void printHighToLow() {
-        // YOUR CODE HERE
+        out = new StringBuffer(100);
+        printHighToLowHelp(root);
+        System.out.print(out.toString());
     }
 
 }
