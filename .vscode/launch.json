@@ -8,6 +8,13 @@
             "type": "java",
             "name": "TestHarness",
             "request": "launch",
+            "mainClass": "project3.TestHarness",
+            "projectName": "cs_113aa192"
+        },
+        {
+            "type": "java",
+            "name": "TestHarness",
+            "request": "launch",
             "mainClass": "project2.TestHarness",
             "vmArgs": "-ea",
             "projectName": "cs_113aa192"
@@ -18,7 +25,7 @@
             "request": "launch",
             "mainClass": "project1_DMcCune.TestHarness",
             "vmArgs": "-ea",
-                "projectName": "cs_113aa192"
+            "projectName": "cs_113aa192"
         },
         {
             "type": "java",
