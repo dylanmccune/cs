@@ -164,20 +164,20 @@ class BST<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> 
 
     public String toString() {
         out = new StringBuffer(100);
-        printhelp(root);
+        toStringHelp(root);
         return out.toString();
     }
 
-    private void printhelp(BSTNode<Key, E> rt) {
+    private void toStringHelp(BSTNode<Key, E> rt) {
         if (rt == null) {
             return;
         }
-        printhelp(rt.left());
-        printVisit(rt.element());
-        printhelp(rt.right());
+        toStringHelp(rt.left());
+        stringVisit(rt.element());
+        toStringHelp(rt.right());
     }
 
-    private void printVisit(E it) {
+    private void stringVisit(E it) {
         out.append(it + " ");
     }
 
