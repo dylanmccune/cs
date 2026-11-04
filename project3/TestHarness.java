@@ -10,23 +10,24 @@ import java.math.*;
 
 public class TestHarness {
     static private Random rndvalue = new Random(); // Hold the Random class object
+
     static int random(int n) {
         return Math.abs(rndvalue.nextInt()) % n;
     }
-    
+
     public static void main(String[] args) {
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         int temp;
-        for (int i=1; i<=30; i++) {
+        for (int i = 1; i <= 30; i++) {
             temp = random(300);
             bst.insert(i, temp);
         }
         System.out.println("Tree: " + bst);
-        
+
         System.out.print("printHighToLow: ");
         bst.printHighToLow();
         System.out.println();
-        
+
         System.out.print("printRange: ");
         printRange(bst.root(), 100, 150);
         System.out.println();
@@ -63,8 +64,6 @@ public class TestHarness {
         } else if (rt.key() > high) {
             output += printRangeHelp(rt.left(), low, high);
         }
-        
-        
 
         return output;
     }
