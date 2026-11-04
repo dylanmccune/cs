@@ -1,19 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package project3;
 
 /**
  * Binary tree node implementation: Pointers to children
  *
- * @param E The data element
+ * @param E   The data element
  * @param Key The associated key for the record
  */
 class BSTNode<Key, E> implements BinNode<E> {
 
-    private Key key;              // Key for this node
-    private E element;            // Element for this node
+    private Key key;               // Key for this node
+    private E element;             // Element for this node
     private BSTNode<Key, E> left;  // Pointer to left child
     private BSTNode<Key, E> right; // Pointer to right child
 

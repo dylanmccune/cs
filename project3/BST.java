@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package project3;
 
 import java.lang.Comparable;
@@ -48,7 +44,7 @@ class BST<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> 
      * @return The record removed, null if there is none.
      */
     public E remove(Key k) {
-        E temp = findhelp(root, k);   // First find it
+        E temp = findhelp(root, k); // First find it
         if (temp != null) {
             root = removehelp(root, k); // Now remove it
             nodecount--;
@@ -85,7 +81,7 @@ class BST<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> 
     public int size() {
         return nodecount;
     }
-    
+
     /**
      * @return A pointer to the root node of the tree.
      */
@@ -184,7 +180,7 @@ class BST<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> 
     private void printVisit(E it) {
         out.append(it + " ");
     }
-    
+
     public void printHighToLowHelp(BSTNode<Key, E> rt) {
         if (rt == null) {
             return;

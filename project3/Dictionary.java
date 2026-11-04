@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package project3;
 
 /**
@@ -27,7 +23,7 @@ public interface Dictionary<Key, E> {
      *
      * @param k The key of the record to be removed.
      * @return A matching record. If multiple records match "k", remove an
-     * arbitrary one. Return null if no record with key "k" exists.
+     *         arbitrary one. Return null if no record with key "k" exists.
      */
     public E remove(Key k);
 
@@ -40,7 +36,7 @@ public interface Dictionary<Key, E> {
 
     /**
      * @return A record matching "k" (null if none exists). If multiple records
-     * match, return an arbitrary one.
+     *         match, return an arbitrary one.
      * @param k The key of the record to find
      */
     public E find(Key k);
