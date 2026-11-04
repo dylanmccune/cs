@@ -25,7 +25,7 @@ public class TestHarness {
         System.out.println();
 
         System.out.print("printRange: ");
-        printRange(bst.root(), 100, 150);
+        printRange(bst.root(), 5, 15);
         System.out.println();
     }
 
