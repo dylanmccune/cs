@@ -11,7 +11,7 @@ public class TestHarness {
         return Math.abs(rndvalue.nextInt()) % n;
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         int temp;
         for (int i = 1; i <= 30; i++) {
@@ -27,6 +27,8 @@ public class TestHarness {
         System.out.print("printRange: ");
         printRange(bst.root(), 5, 15);
         System.out.println();
+
+        System.out.println("sumNodes: " + sumNodes(bst.root()));
     }
 
     public static void printRange(BSTNode<Integer, Integer> rt, int low, int high) {
@@ -62,5 +64,26 @@ public class TestHarness {
         }
 
         return output;
+    }
+
+    public int sumNodes(BSTNode<Integer, Integer> rt) {
+        return sumNodesHelp(rt);
+    }
+
+    int out = 0;
+
+    public int sumNodesHelp(BSTNode<Integer, Integer> rt) {
+        if (rt == null) {
+            return 0;
+        }
+
+        sumNodesHelp(rt.left());
+        sumVisit(rt.element());
+        sumNodesHelp(rt.right());
+        return out;
+        
+    }
+    public void sumVisit(Integer element) {
+        out += element;
     }
 }
