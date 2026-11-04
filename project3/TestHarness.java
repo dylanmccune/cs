@@ -19,7 +19,7 @@ public class TestHarness {
         int temp;
         for (int i=1; i<=30; i++) {
             temp = random(300);
-            bst.insert(temp, temp);
+            bst.insert(i, temp);
         }
         System.out.println("Tree: " + bst);
         
@@ -33,6 +33,39 @@ public class TestHarness {
     }
 
     public static void printRange(BSTNode<Integer, Integer> rt, int low, int high) {
-        // YOUR CODE HERE
+        String output = new String();
+        output += printRangeHelp(rt, low, high);
+        System.out.println(output);
+    }
+
+    public static String printRangeHelp(BSTNode<Integer, Integer> rt, int low, int high) {
+        String output = new String();
+
+        if (rt == null) {
+            return output;
+        }
+
+        if (rt.isLeaf()) {
+            if (rt.key() >= low && rt.key() <= high) {
+                output += rt.element() + " ";
+                return output;
+            } else {
+                return output;
+            }
+        }
+
+        if (rt.key() >= low && rt.key() <= high) {
+            output += rt.element() + " ";
+            output += printRangeHelp(rt.left(), low, high);
+            output += printRangeHelp(rt.right(), low, high);
+        } else if (rt.key() < low) {
+            output += printRangeHelp(rt.right(), low, high);
+        } else if (rt.key() > high) {
+            output += printRangeHelp(rt.left(), low, high);
+        }
+        
+        
+
+        return output;
     }
 }
