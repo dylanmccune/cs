@@ -14,7 +14,7 @@ public class TestHarness {
     public void main(String[] args) {
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         int temp;
-        for (int i = 0; i <= 10; i++) {
+        for (int i = 0; i <= 2000; i++) {
             temp = random(300);
             bst.insert(temp, temp);
         }
@@ -37,7 +37,33 @@ public class TestHarness {
         System.out.println("sumNodes: " + sumNodes(bst.root()));
 
         System.out.println("smallCount: "+ smallCount(bst.root()));
+
+        BST<Integer, Integer> bst2 = new BST<Integer, Integer>();
+        System.out.println("Empty tree");
+        System.out.println("Tree: " + bst2);
+
+        System.out.print("printHighToLow: ");
+        bst2.printHighToLow();
+        System.out.println();
+
+        System.out.print("printRange: ");
+        printRange(bst2.root(), 5, 15);
+        System.out.println();
+
+        System.out.println("sumNodes: " + sumNodes(bst2.root()));
+
+        System.out.println("smallCount: "+ smallCount(bst2.root()));
+
+
     }
+
+    /**
+     * Print all the nodes in the tree with keys between two values
+     * @param rt The root node
+     * @param low The low bound
+     * @param high The high bound
+     * @return The string of the elements in the range
+     */
 
     public static void printRange(BSTNode<Integer, Integer> rt, int low, int high) {
         String output = new String();
@@ -97,7 +123,7 @@ public class TestHarness {
 
     public int smallCount(BSTNode<Integer, Integer> rt) {
 
-        if (rt.left() == null) {
+        if (rt == null || rt.left() == null) {
             return 0;
         }
 
