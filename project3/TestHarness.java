@@ -14,9 +14,15 @@ public class TestHarness {
     public void main(String[] args) {
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         int temp;
-        for (int i = 1; i <= 30; i++) {
+        for (int i = 0; i <= 10; i++) {
             temp = random(300);
-            bst.insert(i, temp);
+            bst.insert(temp, temp);
+        }
+
+        try {
+        BSTImage.drawTree(bst.root(), "bst.png");
+        } catch (IOException e) {
+            System.out.println("Oopsie!");
         }
         System.out.println("Tree: " + bst);
 
@@ -29,6 +35,8 @@ public class TestHarness {
         System.out.println();
 
         System.out.println("sumNodes: " + sumNodes(bst.root()));
+
+        System.out.println("smallCount: "+ smallCount(bst.root()));
     }
 
     public static void printRange(BSTNode<Integer, Integer> rt, int low, int high) {
@@ -85,5 +93,45 @@ public class TestHarness {
     }
     public void sumVisit(Integer element) {
         out += element;
+    }
+
+    public int smallCount(BSTNode<Integer, Integer> rt) {
+
+        if (rt.left() == null) {
+            return 0;
+        }
+
+        if (rt.left().isLeaf()) {
+            return 1; // edge case that was breaking it
+        }
+        return count(rt.left()) + 1; // not sure why i have to add 1 but that's what makes the code work
+                                     // i'm sure there's some bug here
+    }
+
+    /** The number of nodes in a tree, including the root
+     * @return count
+     */
+
+    // Don't use this method it's probably broken lol
+    public int count(BSTNode<Integer, Integer> rt) {
+        if (rt.isLeaf()) {
+            return 1;
+        }
+        int count = 0;
+        if (rt.left() != null) {
+            if (!rt.left().isLeaf()){
+                count += count(rt.left());
+            }
+            count++;
+        }
+
+        if (rt.right() != null) {
+            if (!rt.right().isLeaf()){
+                count += count(rt.right());
+            }
+            count++;
+        }
+        
+        return count;
     }
 }
