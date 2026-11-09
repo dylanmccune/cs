@@ -14,13 +14,13 @@ public class TestHarness {
     public void main(String[] args) {
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         int temp;
-        for (int i = 0; i <= 2000; i++) {
+        for (int i = 0; i <= 20; i++) {
             temp = random(300);
             bst.insert(temp, temp);
         }
 
         try {
-        BSTImage.drawTree(bst.root(), "bst.png");
+            BSTImage.drawTree(bst.root(), "bst.png");
         } catch (IOException e) {
             System.out.println("Oopsie!");
         }
@@ -36,7 +36,7 @@ public class TestHarness {
 
         System.out.println("sumNodes: " + sumNodes(bst.root()));
 
-        System.out.println("smallCount: "+ smallCount(bst.root()));
+        System.out.println("smallCount: " + smallCount(bst.root(), 100));
 
         BST<Integer, Integer> bst2 = new BST<Integer, Integer>();
         System.out.println("Empty tree");
@@ -52,15 +52,15 @@ public class TestHarness {
 
         System.out.println("sumNodes: " + sumNodes(bst2.root()));
 
-        System.out.println("smallCount: "+ smallCount(bst2.root()));
-
+        System.out.println("smallCount: " + smallCount(bst2.root(), 10));
 
     }
 
     /**
      * Print all the nodes in the tree with keys between two values
-     * @param rt The root node
-     * @param low The low bound
+     * 
+     * @param rt   The root node
+     * @param low  The low bound
      * @param high The high bound
      * @return The string of the elements in the range
      */
@@ -115,49 +115,24 @@ public class TestHarness {
         sumVisit(rt.element());
         sumNodesHelp(rt.right());
         return out;
-        
+
     }
     public void sumVisit(Integer element) {
         out += element;
     }
 
-    public int smallCount(BSTNode<Integer, Integer> rt) {
-
-        if (rt == null || rt.left() == null) {
+    public int smallCount(BSTNode<Integer, Integer> rt, int K) {
+        int count = 0;
+        if (rt == null) {
             return 0;
         }
-
-        if (rt.left().isLeaf()) {
-            return 1; // edge case that was breaking it
+        if (rt.key() <= K) {
+            count += 1;
+            count += smallCount(rt.left(), K);
+            count += smallCount(rt.right(), K);
+        } else {
+            return smallCount(rt.left(), K);
         }
-        return count(rt.left()) + 1; // not sure why i have to add 1 but that's what makes the code work
-                                     // i'm sure there's some bug here
-    }
-
-    /** The number of nodes in a tree, including the root
-     * @return count
-     */
-
-    // Don't use this method it's probably broken lol
-    public int count(BSTNode<Integer, Integer> rt) {
-        if (rt.isLeaf()) {
-            return 1;
-        }
-        int count = 0;
-        if (rt.left() != null) {
-            if (!rt.left().isLeaf()){
-                count += count(rt.left());
-            }
-            count++;
-        }
-
-        if (rt.right() != null) {
-            if (!rt.right().isLeaf()){
-                count += count(rt.right());
-            }
-            count++;
-        }
-        
         return count;
     }
 }
