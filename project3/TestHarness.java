@@ -14,16 +14,17 @@ public class TestHarness {
     public void main(String[] args) {
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         int temp;
-        for (int i = 0; i <= 20; i++) {
-            temp = random(300);
+
+        for (Integer i = 0; i < 10; i++) {
+            temp = random(100);
             bst.insert(temp, temp);
         }
 
-        try {
-            BSTImage.drawTree(bst.root(), "bst.png");
-        } catch (IOException e) {
-            System.out.println("Oopsie!");
-        }
+        // try {
+        //     BSTImage.drawTree(bst.root(), "bst.png");
+        // } catch (IOException e) {
+        //     System.out.println("Oopsie!");
+        // }
         System.out.println("Tree: " + bst);
 
         System.out.print("printHighToLow: ");
@@ -37,6 +38,7 @@ public class TestHarness {
         System.out.println("sumNodes: " + sumNodes(bst.root()));
 
         System.out.println("smallCount: " + smallCount(bst.root(), 100));
+        System.out.println("Count: " + bst.countNodes());
 
         BST<Integer, Integer> bst2 = new BST<Integer, Integer>();
         System.out.println("Empty tree");

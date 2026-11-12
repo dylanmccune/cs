@@ -7,8 +7,8 @@ import java.lang.Comparable;
  */
 class BST<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> {
 
-    private BSTNode<Key, E> root;   // Root of the BST
-    int nodecount;                  // Number of nodes in the BST
+    private BSTNode<Key, E> root; // Root of the BST
+    int nodecount; // Number of nodes in the BST
 
     /**
      * Constructor
@@ -196,4 +196,24 @@ class BST<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> 
         System.out.print(out.toString());
     }
 
+    public int countNodes() {
+        if (root == null) {
+            return 0;
+        }
+        return countNodesHelp(root) + 1;
+    }
+
+    public int countNodesHelp(BSTNode<Key, E> rt) {
+        int count = 0;
+
+        if (rt.right() != null) {
+            count += 1;
+            count += countNodesHelp(rt.right());
+        }
+        if (rt.left() != null) {
+            count += 1;
+            count += countNodesHelp(rt.left());
+        }
+        return count;
+    }
 }
