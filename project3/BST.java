@@ -216,4 +216,23 @@ class BST<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> 
         }
         return count;
     }
+
+    public int countLeaves() {
+        return countLeavesHelp(root);
+    }
+    
+    public int countLeavesHelp(BSTNode<Key, E> rt) {
+        int count = 0;
+        if (rt == null) {
+            return 0;
+        }
+
+        if (rt.isLeaf()) {
+            count += 1;
+        }
+
+        count += countLeavesHelp(rt.left());
+        count += countLeavesHelp(rt.right());
+        return count;
+    }
 }

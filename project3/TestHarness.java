@@ -20,11 +20,11 @@ public class TestHarness {
             bst.insert(temp, temp);
         }
 
-        // try {
-        //     BSTImage.drawTree(bst.root(), "bst.png");
-        // } catch (IOException e) {
-        //     System.out.println("Oopsie!");
-        // }
+        try {
+            BSTImage.drawTree(bst.root(), "bst.png");
+        } catch (IOException e) {
+            System.out.println("Oopsie!");
+        }
         System.out.println("Tree: " + bst);
 
         System.out.print("printHighToLow: ");
@@ -39,6 +39,9 @@ public class TestHarness {
 
         System.out.println("smallCount: " + smallCount(bst.root(), 100));
         System.out.println("Count: " + bst.countNodes());
+
+        System.out.println("evenNodes: " + evenNodes(bst.root()));
+        System.out.println("countLeaves: " + bst.countLeaves());
 
         BST<Integer, Integer> bst2 = new BST<Integer, Integer>();
         System.out.println("Empty tree");
@@ -135,6 +138,23 @@ public class TestHarness {
         } else {
             return smallCount(rt.left(), K);
         }
+        return count;
+    }
+
+    public int evenNodes(BSTNode<Integer, Integer> rt) {
+        int count = 0;
+
+        if (rt == null) {
+            return 0;
+        }
+
+        if (rt.key() % 2 == 0) {
+            count += 1;
+        }
+
+        count += evenNodes(rt.left());
+        count += evenNodes(rt.right());
+
         return count;
     }
 }
