@@ -42,6 +42,9 @@ public class TestHarness {
 
         System.out.println("evenNodes: " + evenNodes(bst.root()));
         System.out.println("countLeaves: " + bst.countLeaves());
+        System.out.println("countParents: " + bst.countParents());
+
+        assert bst.countLeaves() + bst.countParents() == bst.countNodes() : "Leaves + parents should equal the # of nodes";
 
         BST<Integer, Integer> bst2 = new BST<Integer, Integer>();
         System.out.println("Empty tree");
